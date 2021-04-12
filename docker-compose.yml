@@ -1,7 +1,7 @@
 version: '2.1'
 
 services:
-  spring-boot-template:
+  rpe-send-letter-service-container-new:
     build:
       context: .
       args:
