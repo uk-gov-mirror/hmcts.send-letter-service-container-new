@@ -108,7 +108,7 @@ jacocoTestReport {
   }
   afterEvaluate {
     getClassDirectories().from = getClassDirectories().files.collect {
-      fileTree(dir: it)
+      fileTree(dir: it).include("**/build/jacoco/*.exec")
     }
   }
 }
