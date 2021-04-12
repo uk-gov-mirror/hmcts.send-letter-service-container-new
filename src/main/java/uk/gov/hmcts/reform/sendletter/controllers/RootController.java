@@ -23,6 +23,6 @@ public class RootController {
      */
     @GetMapping("/")
     public ResponseEntity<String> welcome() {
-        return ok("Welcome to rpe-send-letter-service-container-new");
+        return ok("Welcome to rpe-send-letter-service-container-new controller");
     }
 }
