@@ -108,7 +108,10 @@ jacocoTestReport {
   }
   afterEvaluate {
     getClassDirectories().from = getClassDirectories().files.collect {
-      fileTree(dir: it).include("**/build/jacoco/*.exec")
+      fileTree(dir: it, exclude: [
+        'uk/gov/hmcts/reform/sendletter/config/**',
+        'uk/gov/hmcts/reform/sendletter/Application.*' // no need to cover spring boot app entry point
+      ])
     }
   }
 }
