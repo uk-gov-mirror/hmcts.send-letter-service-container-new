@@ -1,0 +1,20 @@
+#!groovy
+@Library("Infrastructure")
+
+import uk.gov.hmcts.contino.GradleBuilder
+
+def type = "java"
+def product = "rpe"
+def component = "send-letter-container-new"
+
+def channel = '#bulk-print-build-notices'
+
+GradleBuilder builder = new GradleBuilder(this, product)
+
+withPipeline(type, product, component) {
+  after('test') {
+    builder.gradle('integration')
+  }
+  enableSlackNotifications(channel)
+  disableLegacyDeployment()
+}
