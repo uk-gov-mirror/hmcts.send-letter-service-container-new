@@ -2,7 +2,7 @@ name: send-letter-service-container-new
 apiVersion: v2
 description: A Helm chart for send-letter-service-container-new App
 home: https://github.com/hmcts/send-letter-service-container-new
-version: 0.0.4
+version: 0.0.5
 maintainers:
   - name: HMCTS BSP Team
     email: bspteam@hmcts.net
