@@ -91,7 +91,7 @@ checkstyle {
 }
 
 pmd {
-  toolVersion = "6.18.0"
+  toolVersion = "6.19.0"
   sourceSets = [sourceSets.main, sourceSets.test, sourceSets.functionalTest, sourceSets.integrationTest, sourceSets.smokeTest]
   reportsDir = file("$project.buildDir/reports/pmd")
   // https://github.com/pmd/pmd/issues/876
@@ -104,11 +104,19 @@ jacocoTestReport {
   reports {
     xml.enabled = true
     csv.enabled = false
-    xml.destination file("${buildDir}/reports/jacoco/test/jacocoTestReport.xml")
+    xml.destination = file("${buildDir}/reports/jacoco/test/jacocoTestReport.xml")
+  }
+  afterEvaluate {
+    getClassDirectories().from = getClassDirectories().files.collect {
+      fileTree(dir: it, exclude: [
+        'uk/gov/hmcts/reform/sendletter/config/**',
+        'uk/gov/hmcts/reform/sendletter/Application.*' // no need to cover spring boot app entry point
+      ])
+    }
   }
 }
 
-project.tasks['sonarqube'].dependsOn jacocoTestReport
+project.tasks['sonarqube'].dependsOn test, integration, jacocoTestReport
 
 sonarqube {
   properties {
@@ -187,6 +195,7 @@ dependencies {
 
   implementation group: 'uk.gov.hmcts.reform', name: 'logging', version: versions.reformLogging
   implementation group: 'uk.gov.hmcts.reform', name: 'logging-appinsights', version: versions.reformLogging
+  implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-bootstrap', version: '3.0.1'
   implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-netflix-hystrix', version: '2.2.7.RELEASE'
 
   compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.14.1'
