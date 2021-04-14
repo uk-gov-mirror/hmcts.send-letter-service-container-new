@@ -13,4 +13,9 @@ java:
           alias: STORAGE_CONNECTION_STRING
   environment:
 
-
+function:
+  trigger:
+    type: azure-blob
+    servicebus:
+      blobContainerName: "new"
+      connection: STORAGE_CONNECTION_STRING
