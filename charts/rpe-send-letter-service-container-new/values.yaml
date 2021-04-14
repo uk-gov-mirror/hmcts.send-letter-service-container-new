@@ -9,6 +9,8 @@ java:
       secrets:
         - name: app-insights-instrumentation-key
           alias: azure.application-insights.instrumentation-key
+        - name: storage-connecton-string-new
+          alias: STORAGE_CONNECTION_STRING
   environment:
 
 

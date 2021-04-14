@@ -14,6 +14,9 @@ management:
 #If you use a database then uncomment below lines and update db properties accordingly
 spring:
   config:
-    import: "optional:configtree:/mnt/secrets/send-letter-service-container-new:/"
+    import: "optional:configtree:/mnt/secrets/send-letter-service-container-new/"
   application:
     name: Send letter service container new
+
+storage:
+  connection:${STORAGE_CONNECTION_STRING:"dummy"}
